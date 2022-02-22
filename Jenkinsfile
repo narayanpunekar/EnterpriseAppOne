@@ -42,7 +42,8 @@ pipeline {
 		}
 		stage("Deploy to staging") {
 			steps { 
-				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms3G -Xmx3G' --name memoryheap-enterpriseapp-app npunekar/memoryheap-enterpriseapp"
+				sh "docker container rm -f memoryheap-enterpriseapp-app" 
+				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms4G -Xmx4G' --name memoryheap-enterpriseapp-app npunekar/memoryheap-enterpriseapp"
 			}
 		}
     }
