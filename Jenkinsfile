@@ -30,19 +30,19 @@ pipeline {
 		}
 		stage("Docker build") {
 			steps {
-				sh "docker build -f ExecDockerfile -t npunekar/memoryheap-EnterpriseAppOne ."
+				sh "docker build -f ExecDockerfile -t npunekar/memoryheap-enterpriseapp ."
 			}
 		}
 		stage("Docker push") {
 			steps {
 				sh "cat ./password | docker login --username npunekar --password-stdin"  
-				sh "docker push npunekar/memoryheap-EnterpriseAppOne"
+				sh "docker push npunekar/memoryheap-enterpriseapp"
 				sh "docker logout" 
 			}
 		}
 		stage("Deploy to staging") {
 			steps { 
-				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms3G -Xmx4G' --name memoryheap-EnterpriseAppOne-app npunekar/memoryheap-EnterpriseAppOne"
+				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms3G -Xmx4G' --name memoryheap-enterpriseapp-app npunekar/memoryheap-enterpriseapp"
 			}
 		}
     }
