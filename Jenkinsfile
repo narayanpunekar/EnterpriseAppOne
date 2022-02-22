@@ -42,7 +42,7 @@ pipeline {
 		}
 		stage("Deploy to staging") {
 			steps { 
-				//sh "docker container rm -f messages-enterprise-app" 
+				sh "docker container rm -f messages-enterprise-app" 
 				sh "docker rmi \$(docker images -f \"dangling=true\" -q)" 
 				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms512M -Xmx1024M' --name messages-enterprise-app npunekar/messages-enterprise-app"
 			}
