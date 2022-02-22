@@ -44,7 +44,7 @@ pipeline {
 			steps { 
 				sh "docker container rm -f memoryheap-enterpriseapp-app" 
 				sh "docker rmi \$(docker images -f \"dangling=true\" -q)" 
-				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms4G -Xmx5G' --name memoryheap-enterpriseapp-app npunekar/memoryheap-enterpriseapp"
+				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms512M -Xmx1G' --name memoryheap-enterpriseapp-app npunekar/memoryheap-enterpriseapp"
 			}
 		}
     }
