@@ -1,0 +1,10 @@
+version: '3'
+services: 
+  messages-enterprise-app:
+    image: npunekar/messages-enterprise-app:latest 
+    container_name: messages-enterprise-app 
+    ports:
+      - 8080 
+  glassfish:
+    image: glassfish:latest 
+    container_name: glassfish 

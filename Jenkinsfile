@@ -44,12 +44,14 @@ pipeline {
 			steps { 
 				sh "docker container rm -f messages-enterprise-app" 
 				sh "docker rmi \$(docker images -f \"dangling=true\" -q)" 
-				sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms512M -Xmx512M' --name messages-enterprise-app npunekar/messages-enterprise-app"
+				//sh "docker run -d -p 9090:8080 -e JAVA_OPTS='-Xms512M -Xmx512M' --name messages-enterprise-app npunekar/messages-enterprise-app"
+				sh "docker-compose up -d" 
 			}
 		}
     }
     post {
         always {
+			sh "docker-compose down" 
             mail to: 'narayan.v.punekar@gmail.com',
             subject: "Completed Pipeline: ${currentBuild.fullDisplayName}", 
             body: "Build completed, ${env.BUILD_URL}"
